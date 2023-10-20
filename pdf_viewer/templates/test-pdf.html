@@ -1,0 +1,11 @@
+{% extends "testPDF.html" %}
+{% block content %}    
+<form action="{% url "save-pdf" %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="pdf_file" accept=".pdf">
+    <button type="submit">Enviar PDF</button>
+</form>
+<a href="{{ pdf_file_url }}" target="_blank">Abrir PDF</a>
+
+
+{% endblock content %}
