@@ -1,4 +1,9 @@
 {% extends "testPDF.html" %}
+{% load static %}   
+{% block imports %}
+    <script src="{% static "js/test.js" %}"></script>
+    <script src="media/pdf.js/build/pdf.js"></script>
+{% endblock imports %}
 {% block content %}    
 <form action="{% url "save-pdf" %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -8,5 +13,10 @@
 {% comment %} Link pdf {% endcomment %}
 <a href="{{ pdf_file_url }}" target="_blank">Abrir PDF</a>
 
+<h1>Renderizacao de arquivo PDF</h1>
+<div>
+  <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+</div>
 
+<canvas id="the-canvas"></canvas>
 {% endblock content %}
