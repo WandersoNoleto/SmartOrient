@@ -1,56 +1,83 @@
-// Url do arquivo pdf
-var url = 'media/HIstoricoParcial.pdf';
+// Use pdfUrl conforme necessário em seu código JavaScript
+console.log(pdfUrl);
 
-// Carrega via <script> tag, cria endereço para acesso ao PDF.js exports.
-var pdfjsLib = window['media/pdf.js/build/pdf.js'];
+const url = "/media/HIstoricoParcial.pdf";
+
+(async function () {
+
+    // Specified the workerSrc property
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "/media/pdf.js/build/pdf.worker.js";
+
+    // Create the PDF document
+    const doc = await pdfjsLib.getDocument(url).promise;
+
+    const minPage = 1;
+    const maxPage = doc._pdfInfo.numPages;
+    let currentPage = 1;
+
+    // Get page 1
+    await getPage(doc, currentPage);
+
+    // Display the page number
+    document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`;
+
+    // The previous button click event
+    document.getElementById("previous").addEventListener("click", async () => {
+
+        if (currentPage > minPage) {
+
+            // Get the previous page
+            await getPage(doc, currentPage--);
+
+            // Display the page number
+            document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`;
+
+        }
+
+    });
+
+    // The next button click event
+    document.getElementById("next").addEventListener("click", async () => {
+
+        if (currentPage < maxPage) {
+
+            // Get the next page
+            await getPage(doc, currentPage++);
+
+            // Display the page number
+            document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`;
+
+        }
+
+    });
+
+})();
 
 
-// Asynchronous download do PDF
-var loadingTask = pdfjsLib.getDocument(url);
+async function getPage(doc, pageNumber) {
 
-function renderizaPagina(pageNumber) {
+    if (pageNumber >= 1 && pageNumber <= doc._pdfInfo.numPages) {
 
-    loadingTask.promise.then(function(pdf) {
-        console.log('PDF loaded');
-       
-        // Pega primeira page
-        pdf.getPage(pageNumber).then(function(page) {
-        console.log('Page loaded: '+ pageNumber );
-        
-        var scale = 1.5;
-        var viewport = page.getViewport({scale: scale});
+        // Fetch the page
+        const page = await doc.getPage(pageNumber);
 
-        // Prepara canvas usando as dimensões da página PDF
-        var canvas = document.getElementById('the-canvas');
-        var context = canvas.getContext('2d');
+        // Set the viewport
+        const viewport = page.getViewport({ scale: 1.5 });
+
+        // Set the canvas dimensions to the PDF page dimensions
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
-        // Renderiza página PDF para canvas 
-        var renderContext = {
-        canvasContext: context,
-        viewport: viewport
-        };
-        var renderTask = page.render(renderContext);
+        // Render the PDF page into the canvas context
+        return await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
 
-            renderTask.promise.then(function () {
-            console.log('Página renderizada!');
-        });
-    });
-    }, function (reason) {
-    // Mostra erro
-    console.error(reason);
-    });
+    } else {
+        console.log("Please specify a valid page number");
+    }
 
 }
-
-var pageNumber = 1;
-//mostra a primeira página do arquivo pdf
-pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-    pdfDoc = pdfDoc_;
-    document.getElementById('page_count').textContent = pdfDoc.numPages;
-    document.getElementById('page_num').textContent = pageNumber;  
- 
-    // Chamando a renderizacao da página 1
-    renderizaPagina(pageNumber);
-  });
