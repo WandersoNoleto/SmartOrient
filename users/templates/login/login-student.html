@@ -1,0 +1,25 @@
+{% extends "baseLoginRegister.html" %}
+{% block content %}
+{% load static %}
+    <div class="card-body">
+        <div class="row text-center">
+            <div class="">
+                <button class="btn btn-secondary" type="button">Aluno</button>
+                <button class="btn btn-outline-secondary" type="button">Orientador</button>
+                <button class="btn btn-outline-secondary" type="button">Coordenação</button>
+            </div>
+        </div>
+        <form action="{% url "login_student" %}" method="POST">{% csrf_token %}
+            {{error_message}}
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Matrícula" name="enrollment">
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Senha" name="password">
+            </div>
+            <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Acessar</button>
+            </div>
+        </form>
+
+{% endblock content %}
