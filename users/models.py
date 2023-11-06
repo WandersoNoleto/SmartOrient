@@ -12,7 +12,7 @@ class Student(models.Model):
         return self.full_name
     
 class Advisor(models.Model):
-    full_name    = models.CharField(max_length=50, verbose_name="Nome Completo")
+    full_name    = models.models.CharField(max_length=50, verbose_name="Nome Completo")
     email        = models.EmailField(max_length=50, verbose_name="Email")
     enrollment   = models.CharField(max_length=50, verbose_name="Matrícula") 
     phone_number = models.CharField(max_length=50, verbose_name="Número de Telefone")
