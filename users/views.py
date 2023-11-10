@@ -1,3 +1,5 @@
+from hashlib import sha256
+
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 
@@ -14,7 +16,7 @@ def login_student(request):
         print(student)
         if student is not None:
             login(request, student)
-            return redirect("Home")  # Redireciona para a página Home após o login bem-sucedido
+            return redirect("Home")  
         else:
             return render(request, 'login/login-student.html', {'error_message': 'Credenciais incorretas'})
 
@@ -32,7 +34,7 @@ def register_student_save(request):
         password     = request.POST.get("password")
         email        = request.POST.get("email")
 
-        student = Student(
+        student = Student.objects.create_user(
             full_name       = full_name, 
             course          = course, 
             phone_number    = phone_number,
@@ -42,5 +44,6 @@ def register_student_save(request):
         )
 
         student.save()
+
 
     return redirect("login_student")
