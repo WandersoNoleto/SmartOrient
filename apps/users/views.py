@@ -15,7 +15,7 @@ def login_student(request):
         student = authenticate(request, email=email, password=password)
         if student is not None:
             login(request, student)
-            return HttpResponse("Estudante logado com sucesso")  
+            return redirect("Home")
         else:
             return render(request, 'login/login-student.html', {'error_message': 'Credenciais incorretas'})
 
