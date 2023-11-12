@@ -4,13 +4,13 @@
     <div class="row text-center">
         <p class="login-box-msg">Registrar-se</p>
         <div class="">
-            <button class="btn btn-secondary" type="button">Aluno</button>
+            <button class="btn btn-outline-secondary" type="button">Aluno</button>
             <button class="btn btn-outline-secondary" type="button">Orientador</button>
-            <button class="btn btn-outline-secondary" type="button">Coordenação</button>
+            <button class="btn btn-secondary" type="button">Coordenação</button>
         </div>
     </div>
-    <form action="{% url "register_student_save" %}" method="POST">{% csrf_token %}
-        {% for field in formStudent %}
+    <form action="{% url "register_coordination_save" %}" method="POST">{% csrf_token %}
+        {% for field in formCoordination %}
             <div class="input-group mb-3">
                 <input type="{{field.field.widget.input_type}}" class="form-control" placeholder="{{field.label}}" name="{{field.name}}">
             </div>
