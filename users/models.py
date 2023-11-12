@@ -1,17 +1,14 @@
-from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin,
-                                        UserManager)
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
+from users.managers import GenericUserManager
 
-class GenericUserManager(UserManager):
-    def create_user(self, **extra_fields):
-        return self._create_user(**extra_fields)
 
 class GenericUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
 
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_staff  = models.BooleanField(default=False)
     
     objects = GenericUserManager()
 

@@ -8,12 +8,10 @@ from users.models import Advisor, Coordination, Student
 
 def login_student(request):
     if request.method == "POST":
-        enrollment  = request.POST.get("enrollment")
+        email  = request.POST.get("email")
         password    = request.POST.get("password")
-        print(enrollment, password)
 
-        student = authenticate(request, model=Student, enrollment=enrollment, password=password)
-        print(student)
+        student = authenticate(request, email=email, password=password)
         if student is not None:
             login(request, student)
             return redirect("Home")  
