@@ -29,7 +29,7 @@
 
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="" class="h1"><b>Smart</b>Orient</a>
+                <a href="{% url "Home" %}" class="h1"><b>Smart</b>Orient</a>
             </div>
 
             {% block content %}{% endblock content %}
@@ -38,7 +38,8 @@
                 <a href="">Esqueci minha senha</a>
             </p>
             <p class="mb-0">
-                <a href="{% url "register_student_page" %}" class="text-center">Não possui cadastro? Registre-se</a>
+                <a href="{% block link_register %}{% endblock link_register %}" class="text-center">Não possui
+                    cadastro? Registre-se</a>
             </p>
         </div>
 

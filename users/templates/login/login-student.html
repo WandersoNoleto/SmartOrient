@@ -2,11 +2,11 @@
 {% block content %}
 {% load static %}
     <div class="card-body">
-        <div class="row text-center">
-            <div class="">
-                <button class="btn btn-secondary" type="button">Aluno</button>
-                <button class="btn btn-outline-secondary" type="button">Orientador</button>
-                <button class="btn btn-outline-secondary" type="button">Coordenação</button>
+        <div class="row text-center mt-3 mb-3">
+            <div class="mx-auto">
+                <a href="{% url "login_student" %}"><button class="btn btn-secondary" type="button">Aluno</button></a>
+                <a href="{% url "login_advisor" %}"><button class="btn btn-outline-secondary" type="button">Orientador</button></a>
+                <a href="{% url "login_coordination" %}"><button class="btn btn-outline-secondary" type="button">Coordenação</button></a>
             </div>
         </div>
         <form action="{% url "login_student" %}" method="POST">{% csrf_token %}
@@ -23,3 +23,4 @@
         </form>
 
 {% endblock content %}
+{% block link_register %}{% url "register_student_page" %}{% endblock link_register %}
