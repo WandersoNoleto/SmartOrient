@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from guidances.forms import GuidanceRegisterForm
 from guidances.models import Guidance
 from users.models import Student
 
@@ -10,10 +11,14 @@ def home(request):
     guidances      = Guidance.objects.all()
     logged_user_id = request.user.id
     logged_user    = Student.objects.filter(genericuser_ptr_id=logged_user_id).first()
+    formGuidance   = GuidanceRegisterForm
 
     context = {
         'guidances': guidances,
-        'logged_user': logged_user
+        'logged_user': logged_user,
+        'formGuidance': formGuidance
         }
+    
+    print(formGuidance.as_p)
 
     return render(request, 'base.html', context)

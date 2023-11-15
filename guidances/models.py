@@ -19,10 +19,11 @@ class Guidance(models.Model):
 
 
     def generate_guidance_code(self):
-        return ''.join(random.choice(ascii_uppercase + digits) for _ in range(6))
+        generated_code =  ''.join(random.choice(ascii_uppercase + digits) for _ in range(6))
+        self.guidance_code = generated_code
     
     def set_start_date(self):
-        date = datetime.now().strftime("%d/%m/%Y")
+        date = datetime.now().strftime("%Y-%m-%d")
         self.start_date = date
 
 
