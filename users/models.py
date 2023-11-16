@@ -21,7 +21,7 @@ class GenericUser(AbstractBaseUser, PermissionsMixin):
         if len(parts) < 3:
             return self.full_name
 
-        abbreviated = [parts[0]] + [f"{name[0]}." for name in parts[1:-1]] + [parts[-1]]
+        abbreviated = [parts[0]] + [f"{name[0]}." if name.lower() not in {"e", "de"} else name for name in parts[1:-1]] + [parts[-1]]
         abbreviated_name = ' '.join(abbreviated)
 
         return abbreviated_name

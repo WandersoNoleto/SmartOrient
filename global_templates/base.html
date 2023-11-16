@@ -11,7 +11,7 @@
     {% block imports %}{% endblock imports %}
 </head>
 
-<body clas="hold-transition sidebar-mini">
+<body clas="hold-transition " style="overflow: hidden;">
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
@@ -24,7 +24,7 @@
 
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="info">
-                    <a href="#" class="d-block">{{logged_user.abbreviate_name}}</a>
+                    <a href="#" class="d-block">{{full_name}}</a>
                 </div>
             </div>
 
