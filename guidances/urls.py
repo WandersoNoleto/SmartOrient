@@ -3,6 +3,6 @@ from django.urls import path
 from guidances import views
 
 urlpatterns = [
-    path('guidance-register-save/', views.guidance_register_save, name="guidance_register_save")
-
+    path('register-guidance-page/student', views.register_guidance_page, name="register_guidance_page"),
+    path('register-guidance-save/', views.register_guidance_save, name="register_guidance_save"),
 ]

@@ -19,6 +19,5 @@ def home(request):
         'formGuidance': formGuidance
         }
     
-    print(formGuidance.as_p)
+    return render(request, 'studentHome.html', context)
 
-    return render(request, 'base.html', context)

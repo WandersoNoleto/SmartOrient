@@ -1,0 +1,40 @@
+{% extends "baseStudent.html" %}
+
+{% block mainContent %}
+<div class="d-flex justify-content-end mb-3 mr-2">
+    <a href="{% url "register_guidance_page" %}"><button type="button" class="btn btn-sm btn-success text-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fas fa-plus mr-1"></i> Cadastrar Orientação
+    </button></a>
+</div>
+
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="content-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-container overflow-auto" style="max-height: 30rem;">
+                        {% for guidance in guidances %}
+                        <div class="card mb-4 {% if forloop.first %}first-card{% endif %}">
+                            <div class="card-header text-center text-secondary">
+                                <h3 class="card-title">
+                                    <span class="font-weight-bold small">{{ guidance.guidance_code }}</span>
+                                    <span class="text-muted">&nbsp;&bull;&nbsp;</span>
+                                    <span class="small">{{ guidance.project_title }}</span>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-secondary small">
+                                    Orientador: {{ guidance.advisor }}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock mainContent %}
