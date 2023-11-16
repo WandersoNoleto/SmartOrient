@@ -35,7 +35,6 @@ def register_guidance_save(request):
             student       = student,
             advisor       = advisor,
             coordination  = coordination,
-            status        = "Em andamento"
         )
 
         guidance.set_start_date()

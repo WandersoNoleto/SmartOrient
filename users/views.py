@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -151,3 +151,8 @@ def register_coordination_save(request):
         coordination.save()
 
     return redirect("login_coordination")
+
+def custom_logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect("Home")

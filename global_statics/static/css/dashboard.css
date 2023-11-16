@@ -1,0 +1,32 @@
+.default-scrollbar::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.default-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #6c757d; /* Cor do polegar (thumb) */
+    border-radius: 0.8rem;
+}
+
+.default-scrollbar::-webkit-scrollbar-track {
+    background-color: #f8f9fa; /* Cor da faixa da barra de rolagem */
+    border-radius: 0.8rem;
+}
+
+.card-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.badge-custom {
+    margin-left: auto;
+}
+
+.blue-stripe {
+    width: 4px; /* Largura da faixa azul */
+    height: 100%; /* Altura igual à altura do card */
+    background-color: #007BFF; /* Cor azul */
+    position: absolute;
+    left: 0;
+    top: 0;
+}

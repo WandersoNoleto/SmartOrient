@@ -13,10 +13,16 @@ class Guidance(models.Model):
     student       = models.ForeignKey(Student, on_delete=models.CASCADE, max_length=100, blank=False, null=False, verbose_name="Estudante")
     advisor       = models.ForeignKey(Advisor, on_delete=models.CASCADE, max_length=100, blank=False, null=False, verbose_name="Orientador")
     coordination  = models.ForeignKey(Coordination, on_delete=models.SET_NULL, max_length=100, blank=True, null=True, verbose_name="Coordenação")
-    status        = models.CharField(max_length=50, default="Em andamento", verbose_name="Status")
+    status        = models.CharField(max_length=50, default="Pendente", verbose_name="Status")
     start_date    = models.DateField(verbose_name="Data de início")
     guidance_code = models.CharField(max_length=6, unique=True, verbose_name="Código Da Orientação")
 
+
+    def project_title_format(self):
+        if len(self.project_title) >= 64:
+            return self.project_title[:64] + "..."
+        else:
+            return self.project_title
 
     def generate_guidance_code(self):
         code = ''.join(random.choices(ascii_uppercase + digits, k=6))

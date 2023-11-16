@@ -13,5 +13,7 @@ urlpatterns = [
 
     path('login/coordination/', views.login_coordination, name="login_coordination"),
     path('register/coordination/', views.register_coordination_page, name="register_coordination_page"),
-    path('register/coordination/save/', views.register_coordination_save, name="register_coordination_save")
+    path('register/coordination/save/', views.register_coordination_save, name="register_coordination_save"),
+
+    path('logout/', views.custom_logout, name="logout")
 ]
