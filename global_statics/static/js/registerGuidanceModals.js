@@ -12,13 +12,12 @@
       });
   
       // Capturar o valor selecionado no modal e preencher no input de Coordenação
-      function selectAdvisor(coordinationCode, inputId) {
-          // Fechar o modal
+      function selectCoordination(coordinationCode, inputId) {
           $('#coordModal').modal('hide');
           $('#' + inputId).val(coordinationCode);
           }
       
           $(document).on('click', '.coord-row', function() {
             var coordinationCode = $(this).find('.coord-code').text();
-            selectAdvisor(coordinationCode, 'coordination');
+            selectCoordination(coordinationCode, 'coordination');
           });
