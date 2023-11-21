@@ -3,17 +3,18 @@
 {% block imports %}
     <script src="{% static "js/registerGuidanceModals.js" %}"></script>
 {% endblock imports %}
+{% block title %}Registrar projeto{% endblock title %}
 {% block mainContent %}
 <div class="content-wrapper">
 
     <div class="container mt-4 bg-white p-4">
-        <h2>Cadastrar Orientação</h2>
+        <h2>Cadastrar Projeto</h2>
         <hr>
         <form method="post" action="{% url "register_guidance_save" %}" class="ps-3 pe-3">
             {% csrf_token %}
             
             <div class="mb-3 row">
-                <label for="projectTitle" class="col-sm-2 form-label">Título do Projeto</label>
+                <label for="projectTitle" class="col-sm-2 form-label">Título</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="projectTitle" name="project_title" required draggable="false">
                 </div>
