@@ -2,10 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from guidances.models import Guidance
+from users.decorators import user_has_permission
 from users.models import Advisor, Coordination, Student
 
 
 @login_required(login_url= '/auth/login/')
+@user_has_permission(allowed_roles=['Students'])
 def register_guidance_page(request):
     advisors = Advisor.objects.all()
     coordinations = Coordination.objects.all()
@@ -43,6 +45,7 @@ def register_guidance_save(request):
 
     return redirect("Home")
 
+@user_has_permission(allowed_roles=['Advisors'])
 def guidances_pending_page(request):
     pending_guidances = Guidance.objects.filter(status="Pendente", advisor_id=request.user.id)
 

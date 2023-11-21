@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -13,7 +14,7 @@ def login_student(request):
         password = request.POST.get("password")
 
         user = authenticate(request, email=email, password=password)
-        if user is not None:
+        if user is not None and user.groups.filter(name='Students').exists():
             login(request, user)
             return redirect("Home")
         else:
@@ -52,6 +53,8 @@ def register_student_save(request):
             email           = email
         )
 
+        student_group = Group.objects.get(name='Students')
+        student.groups.add(student_group)
         student.save()
 
     return redirect("login_student")
@@ -64,7 +67,7 @@ def login_advisor(request):
         password  = request.POST.get("password")
 
         user = authenticate(request, email=email, password=password)
-        if user is not None:
+        if user is not None and user.groups.filter(name='Advisors').exists():
             login(request, user)
             return redirect("home_advisor")
         else:
@@ -100,7 +103,8 @@ def register_advisor_save(request):
             password        = password, 
             email           = email
         )
-
+        advisor_group = Group.objects.get(name='Advisors')
+        advisor.groups.add(advisor_group)
         advisor.save()
 
     return redirect("login_advisor")
@@ -113,7 +117,7 @@ def login_coordination(request):
         password = request.POST.get("password")
 
         user = authenticate(request, email=email, password=password)
-        if user is not None:
+        if user is not None and user.groups.filter(name='Coordinations').exists():
             login(request, user)
             return HttpResponse("Coordenação logado com sucesso") 
         else:
@@ -148,6 +152,8 @@ def register_coordination_save(request):
             email      = email
         )
 
+        coordination_group = Group.objects.get(name='Coordinations')
+        coordination.groups.add(coordination_group)
         coordination.save()
 
     return redirect("login_coordination")
