@@ -5,4 +5,5 @@ from guidances import views
 urlpatterns = [
     path('register-guidance-page/student', views.register_guidance_page, name="register_guidance_page"),
     path('register-guidance-save/', views.register_guidance_save, name="register_guidance_save"),
+    path('pending-guidances/', views.guidances_pending_page, name="guidances_pending_page")
 ]

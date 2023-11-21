@@ -1,0 +1,55 @@
+{% extends "baseStudent.html" %}
+
+{% block mainContent %}
+<div class="content-wrapper bg-white">
+    <div class="d-flex justify-content-between mb-3 mr-2 border-bottom border-bottom-gray pb-3">
+        <div class="align-items-center">
+            <h4 class="mb-0 mt-3 ml-5 text-secondary">Minhas orientações</h4>
+        </div>
+        <div class="d-flex align-items-center">
+            <a href="{% url "guidances_pending_page" %}" class="text-decoration-none">
+                <button type="button" class="btn btn-sm text-sm mt-3 {% if pending_guidances.count > 0 %}btn-danger{% else %}btn-secondary{% endif %}">
+                    Pendentes
+                    <span class="badge ml-2 text-white">{{ pending_guidances.count }}</span>
+                </button>
+            </a>
+        </div>
+        
+    </div>
+    
+
+    <section class="content force-overflow">
+        <div class="content-fluid">
+            <div class="row bg-white">
+                <div class="col-12">
+                    <div class="card-container overflow-auto default-scrollbar" style="max-height: 35rem;">
+                        {% for guidance in guidances %}
+                        <div class="card mb-4 {% if forloop.first %}mt-4{% endif %}" style="width: 80%; margin-left: 10%;">
+                            <div class="blue-stripe"></div> <!-- Faixa azul -->
+                            <div class="card-header text-center text-secondary d-flex align-items-center">
+                                <div class="col">
+                                    <h3 class="card-title mb-0">
+                                        <span class="font-weight-bold small">{{ guidance.guidance_code }}</span>
+                                        <span class="text-muted">&nbsp;&bull;&nbsp;</span>
+                                        <span class="small">{{ guidance.project_title_format }}</span>
+                                    </h3>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="badge badge-info badge-custom">{{guidance.status}}</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-secondary small">
+                                    Aluno: {{ guidance.student }}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock mainContent %}

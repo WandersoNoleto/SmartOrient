@@ -39,8 +39,15 @@ def register_guidance_save(request):
 
         guidance.set_start_date()
         guidance.generate_guidance_code()
-        x = guidance
-        print(x)
         guidance.save()
 
     return redirect("Home")
+
+def guidances_pending_page(request):
+    pending_guidances = Guidance.objects.filter(status="Pendente", advisor_id=request.user.id)
+
+    context = {
+        'pending_guidances': pending_guidances
+    }
+
+    return render(request, 'acceptGuidance.html', context)

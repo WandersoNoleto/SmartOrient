@@ -66,7 +66,7 @@ def login_advisor(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse("Orientador logado com sucesso") 
+            return redirect("home_advisor")
         else:
             return render(request, 'login/login-advisor.html', {'error_message': 'Credenciais incorretas'})
 

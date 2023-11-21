@@ -1,0 +1,36 @@
+{% extends "baseStudent.html" %}
+
+{% block mainContent %}
+<div class="content-wrapper bg-white">
+    <section class="content force-overflow">
+        <div class="content-fluid">
+            <div class="row bg-white">
+                <div class="col-12">
+                    <div class="card-container overflow-auto default-scrollbar" style="max-height: 35rem;">
+                        {% for guidance in pending_guidances %}
+                            <div class="card mb-4 {% if forloop.first %}mt-4{% endif %}" style="width: 80%; margin-left: 10%;">
+                                <div class="blue-stripe"></div> <!-- Faixa azul -->
+                                <div class="card-header text-center text-secondary d-flex align-items-center">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text text-secondary small">
+                                        {% if guidance.inviter %}
+                                            {{ guidance.inviter.full_name }} convidou você para participar do projeto intitulado "{{ guidance.project_title }}" como orientador(a).
+                                            <div class="mt-3">
+                                                <button type="button" class="btn btn-success">Aceitar</button>
+                                                <button type="button" class="btn btn-danger">Recusar</button>
+                                            </div>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock mainContent %}
