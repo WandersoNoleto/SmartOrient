@@ -39,6 +39,8 @@ def register_guidance_save(request):
 
         guidance.set_start_date()
         guidance.generate_guidance_code()
+        x = guidance
+        print(x)
         guidance.save()
 
     return redirect("Home")

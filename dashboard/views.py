@@ -8,7 +8,7 @@ from users.models import Student
 
 @login_required(login_url= '/auth/login/')
 def home(request):
-    guidances      = Guidance.objects.filter(status="Em andamento")
+    guidances      = Guidance.objects.filter(status="Em andamento", student_id=request.user.id)
     logged_user_id = request.user.id
     logged_user    = Student.objects.filter(genericuser_ptr_id=logged_user_id).first()
     formGuidance   = GuidanceRegisterForm

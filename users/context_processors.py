@@ -16,6 +16,8 @@ def logged_user(request):
     elif coordination:
         user = coordination
         identifier_field = user.code_format if user else ''
-
+    else:
+        user = None
+        identifier_field = ''
 
     return {'logged_user': user, 'user_identifier_field': identifier_field}

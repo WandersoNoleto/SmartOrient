@@ -12,9 +12,9 @@ def login_student(request):
         email    = request.POST.get("email")
         password = request.POST.get("password")
 
-        student = authenticate(request, email=email, password=password)
-        if student is not None:
-            login(request, student)
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
             return redirect("Home")
         else:
             return render(request, 'login/login-student.html', {'error_message': 'Credenciais incorretas'})
@@ -63,9 +63,9 @@ def login_advisor(request):
         email     = request.POST.get("email")
         password  = request.POST.get("password")
 
-        advisor = authenticate(request, email=email, password=password)
-        if advisor is not None:
-            login(request, advisor)
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
             return HttpResponse("Orientador logado com sucesso") 
         else:
             return render(request, 'login/login-advisor.html', {'error_message': 'Credenciais incorretas'})
@@ -112,9 +112,9 @@ def login_coordination(request):
         email    = request.POST.get("email")
         password = request.POST.get("password")
 
-        coordination = authenticate(request, email=email, password=password)
-        if coordination is not None:
-            login(request, coordination)
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
             return HttpResponse("Coordenação logado com sucesso") 
         else:
             return render(request, 'login/login-coordination.html', {'error_message': 'Credenciais incorretas'})
