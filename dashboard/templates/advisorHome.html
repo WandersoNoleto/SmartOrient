@@ -9,7 +9,7 @@
         <div class="d-flex align-items-center">
             <a href="{% url "guidances_pending_page" %}" class="text-decoration-none">
                 <button type="button" class="btn btn-sm text-sm mt-3 {% if pending_guidances.count > 0 %}btn-danger{% else %}btn-secondary{% endif %}">
-                    Pendentes
+                    Solicitações
                     <span class="badge ml-2 text-white">{{ pending_guidances.count }}</span>
                 </button>
             </a>
@@ -22,7 +22,7 @@
         <div class="content-fluid">
             <div class="row bg-white">
                 <div class="col-12">
-                    <div class="card-container overflow-auto default-scrollbar" style="max-height: 35rem;">
+                    <div class="card-container overflow-auto default-scrollbar" style="max-height: 32rem;">
                         {% for guidance in guidances %}
                         <div class="card mb-4 {% if forloop.first %}mt-4{% endif %}" style="width: 80%; margin-left: 10%;">
                             <div class="blue-stripe"></div> <!-- Faixa azul -->
@@ -40,7 +40,7 @@
                             </div>
                             <div class="card-body">
                                 <p class="card-text text-secondary small">
-                                    Aluno: {{ guidance.student }}
+                                    Aluno(a): {{ guidance.student }}
                                 </p>
                             </div>
                         </div>

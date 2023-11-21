@@ -2,6 +2,12 @@
 
 {% block mainContent %}
 <div class="content-wrapper bg-white">
+    <div class="d-flex justify-content-between mb-3 mr-2 border-bottom border-bottom-gray pb-3">
+        <div class="align-items-center">
+            <h4 class="mb-0 mt-3 ml-5 text-secondary">Solicitações de orientação</h4>
+        </div>        
+    </div>
+
     <section class="content force-overflow">
         <div class="content-fluid">
             <div class="row bg-white">
@@ -9,17 +15,18 @@
                     <div class="card-container overflow-auto default-scrollbar" style="max-height: 35rem;">
                         {% for guidance in pending_guidances %}
                             <div class="card mb-4 {% if forloop.first %}mt-4{% endif %}" style="width: 80%; margin-left: 10%;">
-                                <div class="blue-stripe"></div> <!-- Faixa azul -->
+                                <div class="blue-stripe"></div>
                                 <div class="card-header text-center text-secondary d-flex align-items-center">
                                     </div>
-                                </div>
                                 <div class="card-body">
-                                    <p class="card-text text-secondary small">
-                                        {% if guidance.inviter %}
-                                            {{ guidance.inviter.full_name }} convidou você para participar do projeto intitulado "{{ guidance.project_title }}" como orientador(a).
-                                            <div class="mt-3">
-                                                <button type="button" class="btn btn-success">Aceitar</button>
-                                                <button type="button" class="btn btn-danger">Recusar</button>
+                                    <p class="card-text text-secondary small text-center">
+                                        {% if guidance.student_id %}
+                                            {% with student=guidance.student %}
+                                                <strong>{{ student.full_name }}</strong> convidou você para participar do projeto intitulado "<strong>{{ guidance.project_title }}</strong>" como orientador(a).
+                                            {% endwith %}
+                                            <div class="mt-3 text-center">
+                                                <a href="{% url "pending_guidance_accept" guidance.id %}"><button type="button" class="btn btn-sm btn-success">Aceitar</button></a>
+                                                <a href="{% url "delete_guidance" guidance.id %}"><button type="button" class="btn btn-sm btn-danger">Recusar</button></a>
                                             </div>
                                         {% endif %}
                                     </p>
