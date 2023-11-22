@@ -30,3 +30,8 @@
     left: 0;
     top: 0;
 }
+
+.custom-card-style {
+    max-height: 10rem;
+    overflow: hidden; /* Adiciona overflow:hidden para evitar que o conteúdo ultrapasse a altura definida */
+}

@@ -1,0 +1,43 @@
+{% extends "baseStudent.html" %}
+{% block title %}{{ guidance.project_title_format }}{% endblock title %}
+{% block mainContent %}
+    <div class="container">
+        <div class="card mt-4 content-wrapper bg-white custom-card-style">
+            <div class="card-header text-center">
+                <h1 class="font-weight-bold" style="font-size: 1.5rem;">{{ guidance.project_title }}</h1>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="font-weight-bold mb-2">Código do Projeto:</p>
+                        <p class="mb-4 font-weight-bold">{{ guidance.guidance_code }}</p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <p class="d-flex align-items-center">
+                            <span class="font-weight-bold mr-2">Aluno(a):</span> {{ guidance.student }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="d-flex align-items-center">
+                            <span class="font-weight-bold mr-2">Orientador(a):</span> {{ guidance.advisor }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <p class="d-flex align-items-center">
+                            <span class="font-weight-bold mr-2">Coordenação:</span> {{ guidance.coordination }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="d-flex align-items-center">
+                            <span class="font-weight-bold mr-2">Data de Início:</span> {{ guidance.start_date }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock mainContent %}

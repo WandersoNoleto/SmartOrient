@@ -21,6 +21,7 @@
                 <div class="col-12">
                     <div class="card-container overflow-auto default-scrollbar" style="max-height: 32rem;">
                         {% for guidance in guidances %}
+                        <a href="{% url "open_guidance" guidance.id %}">
                         <div class="card mb-4 {% if forloop.first %}mt-4{% endif %}" style="width: 80%; margin-left: 10%;">
                             <div class="blue-stripe"></div> <!-- Faixa azul -->
                             <div class="card-header text-center text-secondary d-flex align-items-center">
@@ -41,6 +42,7 @@
                                 </p>
                             </div>
                         </div>
+                        </a>
                         {% endfor %}
                     </div>
                 </div>

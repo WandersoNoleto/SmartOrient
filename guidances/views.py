@@ -68,3 +68,13 @@ def delete_guidance(request, id):
     guidance.delete()
 
     return redirect("home_advisor")
+
+
+def open_guidance(request, id):
+    guidance = get_object_or_404(Guidance, id=id)
+
+    context={
+        'guidance': guidance
+    }
+
+    return render(request, "openGuidance.html", context)
