@@ -9,7 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
-    <link rel="icon" type="image/png" href="{% static 'svgs/LogoSmartOrientAlt4.svg' %}">
+    <link rel="icon" type="image/png" href="{% static 'svgs/LogoSmartOrient-green.svg' %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     {% block imports %}{% endblock imports %}
 </head>
@@ -19,7 +20,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{% url "Home" %}" class="brand-link">
-            <img src="{% static "svgs/LogoSmartOrientAlt4.svg" %}" alt="LogoSmartOrient" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="{% static "svgs/LogoSmartOrientAlt4-dark.svg" %}" alt="LogoSmartOrient" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">SmartOrient</span>
         </a>
 
@@ -55,12 +56,10 @@
 
         <div class="navbar-nav ml-auto align-items-center">
             <div class="d-flex align-items-center">
-                <!-- Adiciona um ícone de usuário antes do nome -->
                 <div class="user-icon text-sm">
                     <i class="nav-icon fa-solid fa-circle-user"></i>
                 </div>
         
-                <!-- Adiciona o nome do usuário -->
                 <div class="user-name ">
                     <a href="#" class="nav-link text-sm">{{ user_identifier_field }}</a>
                 </div>
