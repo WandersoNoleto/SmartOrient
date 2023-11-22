@@ -119,7 +119,7 @@ def login_coordination(request):
         user = authenticate(request, email=email, password=password)
         if user is not None and user.groups.filter(name='Coordinations').exists():
             login(request, user)
-            return HttpResponse("Coordenação logado com sucesso") 
+            return redirect("home_coordination") 
         else:
             return render(request, 'login/login-coordination.html', {'error_message': 'Credenciais incorretas'})
 

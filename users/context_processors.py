@@ -15,7 +15,7 @@ def logged_user(request):
         identifier_field = user.abbreviate_name if user else ''
     elif coordination:
         user = coordination
-        identifier_field = user.code_format if user else ''
+        identifier_field = user.code if user else ''
     else:
         user = None
         identifier_field = ''

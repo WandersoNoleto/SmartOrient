@@ -1,0 +1,47 @@
+{% extends "baseStudent.html" %}
+{% block title %}Home{% endblock title %}
+{% block mainContent %}
+<div class="content-wrapper bg-white">
+    <div class="d-flex justify-content-between mb-3 mr-2 border-bottom border-bottom-gray pb-3">
+        <div class="align-items-center">
+            <h4 class="mb-0 mt-3 ml-5 text-secondary">Orientações | {{logged_user.institution}}  <span class="text-muted">&nbsp;&bull;&nbsp;</span> {{logged_user.course}}</h4>
+        </div>
+    </div>
+
+    <section class="content force-overflow">
+        <div class="content-fluid">
+            <div class="row bg-white">
+                <div class="col-12">
+                    <div class="card-container overflow-auto default-scrollbar" style="max-height: 32rem;">
+                        {% for guidance in guidances %}
+                            <div class="card mb-4 {% if forloop.first %}mt-4{% endif %}" style="width: 80%; margin-left: 10%;">
+                                <div class="blue-stripe"></div> <!-- Faixa azul -->
+                                <div class="card-header text-center text-secondary d-flex align-items-center">
+                                    <div class="col">
+                                        <h3 class="card-title mb-0">
+                                            <span class="font-weight-bold small">{{ guidance.guidance_code }}</span>
+                                            <span class="text-muted">&nbsp;&bull;&nbsp;</span>
+                                            <span class="small">{{ guidance.project_title_format }}</span>
+                                        </h3>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="badge badge-info badge-custom">{{guidance.status}}</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text text-secondary small">
+                                        <span class="font-weight-bold">Orientador(a): {{ guidance.advisor }}</span> 
+                                        <span class="text-muted">&nbsp;&bull;&nbsp;</span>
+                                        <span class="font-weight-bold">Aluno(a): {{ guidance.student }}</span> 
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock mainContent %}
