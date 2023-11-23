@@ -29,10 +29,10 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    'pdf_viewer',
     'dashboard',
     'users',
-    'guidances'
+    'guidances',
+    'library'
 ]
 
 

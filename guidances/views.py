@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from guidances.models import Guidance
+from library.models import GuidanceArticle
 from users.decorators import user_has_permission
 from users.models import Advisor, Coordination, Student
 
@@ -9,7 +10,7 @@ from users.models import Advisor, Coordination, Student
 @login_required(login_url= '/auth/login/')
 @user_has_permission(allowed_roles=['Students'])
 def register_guidance_page(request):
-    advisors = Advisor.objects.all()
+    advisors      = Advisor.objects.all()
     coordinations = Coordination.objects.all()
 
     context = {
@@ -72,9 +73,11 @@ def delete_guidance(request, id):
 
 def open_guidance(request, id):
     guidance = get_object_or_404(Guidance, id=id)
+    articles = GuidanceArticle.objects.filter(guidance_id=id)
 
     context={
-        'guidance': guidance
+        'guidance': guidance,
+        'articles': articles
     }
 
     return render(request, "openGuidance.html", context)

@@ -1,4 +1,7 @@
 {% extends "baseStudent.html" %}
+{% load static %}
+
+{% block imports %}<script src="{% static "js/openGuidance.js" %}"></script>{% endblock imports %}
 {% block title %}{{ guidance.project_title_format }}{% endblock title %}
 {% block mainContent %}
     <div class="container">
@@ -37,7 +40,55 @@
                         </p>
                     </div>
                 </div>
+                
+                <div class="row mt-4 text-center">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" onclick="openFileUploadModal()">
+                            Adicionar Arquivo
+                        </button>
+                    </div>
+                </div>
+             
+                <hr class="mt-5 mb-5">
+
+                <div class="row">
+                    {% for article in articles %}
+                        <div class="col-md-3">
+                            <p class="font-weight-bold">{{ article.title }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
+
+<!-- Adicione isso ao final do seu arquivo HTML, substituindo o modal anterior -->
+<div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileUploadModalLabel">Escolher Arquivo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="{% url 'save_guidance_article' guidance.id %}" enctype="multipart/form-data" id="modalUploadForm">
+                {% csrf_token %}
+                <div class="modal-body text-center">
+                    <label for="file-upload-modal" class="btn btn-primary">
+                        <input type="text" name="title" id="title-input" hidden>
+                        <input id="file-upload-modal" type="file" name="file" style="display:none;" onchange="displayFileNameModal()">
+                        Selecionar Arquivo
+                    </label>
+                    <p id="selectedFileNameModal" class="mt-2"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock mainContent %}

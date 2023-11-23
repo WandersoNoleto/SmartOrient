@@ -9,7 +9,8 @@ urlpatterns = [
     path('auth/', include('users.urls')),
     path('', include('dashboard.urls')),
     path('dashboard/', include('dashboard.urls')),
-    path('guidances/', include('guidances.urls'))
+    path('guidances/', include('guidances.urls')),
+    path('library/', include('library.urls'))
 
 ]
 
