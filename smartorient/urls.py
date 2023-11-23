@@ -10,7 +10,8 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('guidances/', include('guidances.urls')),
-    path('library/', include('library.urls'))
+    path('library/', include('library.urls')),
+    path('pdf-viewer/', include('pdf_viewer.urls'))
 
 ]
 

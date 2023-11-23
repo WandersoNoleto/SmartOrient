@@ -54,7 +54,9 @@
                 <div class="row">
                     {% for article in articles %}
                         <div class="col-md-3">
+                            <a href="{% url "view_pdf" article.id %}">                            
                             <p class="font-weight-bold">{{ article.title }}</p>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
@@ -62,7 +64,6 @@
         </div>
     </div>
 
-<!-- Adicione isso ao final do seu arquivo HTML, substituindo o modal anterior -->
 <div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

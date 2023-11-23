@@ -32,7 +32,8 @@ INSTALLED_APPS += [
     'dashboard',
     'users',
     'guidances',
-    'library'
+    'library',
+    'pdf_viewer'
 ]
 
 
