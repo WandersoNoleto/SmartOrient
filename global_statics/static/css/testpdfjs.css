@@ -1,0 +1,31 @@
+#canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+#pageNumber {
+    display: inline;
+}
+
+.previous {
+    display: inline;
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 15%;
+}
+
+.next {
+    display: inline;
+    background-color: #42A047;
+    color: white;
+    border-radius: 15%;
+}
+
+.pdf-container {
+    overflow-y: auto; /* Adiciona scroll vertical quando necessário */
+    height: 500px; /* Altura máxima do contêiner */
+}
+
+canvas {
+    display: block; /* Garante que o canvas se ajuste corretamente ao contêiner */
+}

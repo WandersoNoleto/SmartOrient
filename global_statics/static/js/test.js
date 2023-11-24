@@ -1,83 +1,53 @@
-// Use pdfUrl conforme necessário em seu código JavaScript
-console.log(pdfUrl);
+var pdfUrl = document.getElementById("pdfUrl").value;
 
-const url = "/media/HIstoricoParcial.pdf";
+const url = "/media/guidance_articles/ProjetoTCC_-_PartII.pdf";
 
 (async function () {
-
-    // Specified the workerSrc property
     pdfjsLib.GlobalWorkerOptions.workerSrc = "/media/pdf.js/build/pdf.worker.js";
-
-    // Create the PDF document
     const doc = await pdfjsLib.getDocument(url).promise;
 
-    const minPage = 1;
-    const maxPage = doc._pdfInfo.numPages;
-    let currentPage = 1;
-
-    // Get page 1
-    await getPage(doc, currentPage);
-
-    // Display the page number
-    document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`;
-
-    // The previous button click event
-    document.getElementById("previous").addEventListener("click", async () => {
-
-        if (currentPage > minPage) {
-
-            // Get the previous page
-            await getPage(doc, currentPage--);
-
-            // Display the page number
-            document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`;
-
-        }
-
-    });
-
-    // The next button click event
-    document.getElementById("next").addEventListener("click", async () => {
-
-        if (currentPage < maxPage) {
-
-            // Get the next page
-            await getPage(doc, currentPage++);
-
-            // Display the page number
-            document.getElementById("pageNumber").innerHTML = `Page ${currentPage} of ${maxPage}`;
-
-        }
-
-    });
-
+    // Renderizar todas as páginas de uma vez
+    for (let i = 1; i <= doc._pdfInfo.numPages; i++) {
+        await getPage(doc, i);
+    }
 })();
 
-
 async function getPage(doc, pageNumber) {
-
     if (pageNumber >= 1 && pageNumber <= doc._pdfInfo.numPages) {
-
-        // Fetch the page
         const page = await doc.getPage(pageNumber);
 
-        // Set the viewport
-        const viewport = page.getViewport({ scale: 1.5 });
+        // Criar um novo contêiner para cada página
+        const pageContainer = document.createElement("div");
+        pageContainer.className = "pdf-page";
+        
+        // Adicionar o contêiner da página ao contêiner principal
+        document.getElementById("pdfContainer").appendChild(pageContainer);
 
-        // Set the canvas dimensions to the PDF page dimensions
-        const canvas = document.getElementById("canvas");
+        // Get the dimensions of the mainContent element
+        const mainContent = document.querySelector('.content-wrapper');
+        const mainContentRect = mainContent.getBoundingClientRect();
+
+        // Set the viewport based on the dimensions of the mainContent
+        const viewport = page.getViewport({ scale: 1 });
+        const scale = Math.min(mainContentRect.width / viewport.width, mainContentRect.height / viewport.height);
+        const scaledViewport = page.getViewport({ scale });
+
+        // Criar um novo elemento de canvas para cada página
+        const canvas = document.createElement("canvas");
+        canvas.className = "pdf-canvas";
+        pageContainer.appendChild(canvas);
+
+        // Set the canvas dimensions to the scaled viewport dimensions
         const context = canvas.getContext("2d");
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+        canvas.height = scaledViewport.height;
+        canvas.width = scaledViewport.width;
 
         // Render the PDF page into the canvas context
-        return await page.render({
+        await page.render({
             canvasContext: context,
-            viewport: viewport
+            viewport: scaledViewport
         }).promise;
-
     } else {
         console.log("Please specify a valid page number");
     }
-
 }
