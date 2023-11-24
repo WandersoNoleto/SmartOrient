@@ -27,11 +27,11 @@ async function getPage(doc, pageNumber) {
         document.getElementById("pdfPages").appendChild(pageContainer);
 
         // Get the dimensions of the mainContent element
-        const mainContent = document.querySelector('.content-wrapper');
+        const mainContent = document.body;
         const mainContentRect = mainContent.getBoundingClientRect();
 
         // Set the viewport based on the dimensions of the mainContent
-        const viewport = page.getViewport({ scale: 1 });
+        const viewport = page.getViewport({ scale: 0.6});
         const scale = Math.min(mainContentRect.width / viewport.width, mainContentRect.height / viewport.height);
         const scaledViewport = page.getViewport({ scale });
 
@@ -50,7 +50,16 @@ async function getPage(doc, pageNumber) {
             canvasContext: context,
             viewport: scaledViewport
         }).promise;
+
+        updatePageInfo(pageNumber)
     } else {
         console.log("Please specify a valid page number");
     }
+}
+
+function updatePageInfo(currentPage) {
+    document.getElementById('currentPage').textContent = currentPage;
+    console.log(currentPage)
+    console.log(doc._pdfInfo.numPages)
+    document.getElementById('totalPages').textContent = doc._pdfInfo.numPages;
 }

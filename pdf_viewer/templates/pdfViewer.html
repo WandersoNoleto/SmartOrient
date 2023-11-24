@@ -1,28 +1,63 @@
-{% extends "baseStudent.html" %}
+<!DOCTYPE html>
 {% load static %}
-
-{% block title %}{{ article.title }}{% endblock title %}
-
-{% block imports %}
-    <link rel="stylesheet" href="{% static "css/testpdfjs.css" %}">
-    {% comment %} <script type="module" src="{% static "js/pdfViewer.js" %}"></script> {% endcomment %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }} | SmartOrient</title>
+    <link rel="stylesheet" href="{% static "css/pdfViewer.css" %}">
     <script src="/media/pdf.js/build/pdf.js"></script>
-{% endblock imports %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+    <link rel="icon" type="image/png" href="{% static 'svgs/LogoSmartOrientAlt4.svg' %}">
+</head>
 
-{% block mainContent %}
-    <div class="content-wrapper">
-        <h6>{{article.title}}</h6>
+<body>
+    <nav class="navbar navbar-expand navbar-dark align-items-center">
+        <a href="{% url "Home" %}" class="brand-link">
+            <img src="{% static "svgs/LogoSmartOrientAlt4-dark.svg" %}" alt="LogoSmartOrient" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">SmartOrient</span>
+        </a>
+       
+        <div class="navbar-nav ml-auto align-items-center">
+            <div class="d-flex align-items-center">
+                <div class="user-icon text-sm">
+                    <i class="nav-icon fa-solid fa-circle-user text-white"></i>
+                </div>
+    
+                <div class="user-name">
+                    <a href="#" class="nav-link text-sm text-white">{{ user_identifier_field }}</a>
+                </div>
+            </div>
+    
+            <li class="nav-item">
+                <a href="{% url "custom_logout" %}" class="nav-link text-white">
+                    <i class="fa-solid fa-arrow-right-from-bracket" alt="Logout"></i>
+                </a>
+            </li>
+        </div>
+    </nav>
 
+    <div id="pageInfo" class="text-center" hidden>
+        <h6></h6><div id="currentPage"></div>/<div id="totalPages"></div>
+    </div>
+    
+    <div class="container-fluid p-3 page-content">
         <div class="controls">
             <input type="hidden" id="pdfUrl" value="{{ article.file.path }}">
         </div>
-       
-        <div id="pdfContainer" class="pdf-container">
+
+        <div id="pdfContainer" class="pdf-container default-scrollbar">
             <!-- O conteúdo do PDF será renderizado aqui -->
-            <div id="pdfPages" class="pdf-pages"></div>
+            <div id="pdfPages" class="pdf-pages d-flex justify-content-center align-items-center"></div>
         </div>
 
         <script src="{% static "js/test.js" %}"></script>
     </div>
-{% endblock mainContent %}
 
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0c0eacc6ba.js" crossorigin="anonymous"></script>
+</body>
+</html>

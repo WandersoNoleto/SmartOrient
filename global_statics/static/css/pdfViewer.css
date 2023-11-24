@@ -1,0 +1,33 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.pdf-container {
+    position: relative;
+    overflow-y: auto;
+    height: 85vh; /* Ajuste a altura conforme necessário */
+}
+
+.pdf-pages {
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    overflow: hidden;
+}
+
+.navbar {
+    background-color: #343a40; /* Cor de fundo da barra de navegação */
+}
+
+.navbar-text {
+    color: white; /* Cor do texto na barra de navegação */
+}
+
+.page-content {
+    background-color: #f0f0f0; /* Cor de fundo cinza para a área de renderização da página */
+    padding: 20px; /* Adicione um preenchimento para espaçamento */
+}
