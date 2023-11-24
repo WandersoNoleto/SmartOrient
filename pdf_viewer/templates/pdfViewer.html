@@ -17,8 +17,9 @@
             <input type="hidden" id="pdfUrl" value="{{ article.file.path }}">
         </div>
        
-        <div id="pdfContainer">
+        <div id="pdfContainer" class="pdf-container">
             <!-- O conteúdo do PDF será renderizado aqui -->
+            <div id="pdfPages" class="pdf-pages"></div>
         </div>
 
         <script src="{% static "js/test.js" %}"></script>

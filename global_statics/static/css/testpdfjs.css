@@ -22,10 +22,19 @@
 }
 
 .pdf-container {
-    overflow-y: auto; /* Adiciona scroll vertical quando necessário */
-    height: 500px; /* Altura máxima do contêiner */
+    position: relative;
+    overflow-y: auto;
+    height: 70vh; /* Ajuste a altura conforme necessário */
 }
 
-canvas {
-    display: block; /* Garante que o canvas se ajuste corretamente ao contêiner */
+.pdf-pages {
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-controls {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }

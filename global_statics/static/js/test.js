@@ -2,11 +2,14 @@ var pdfUrl = document.getElementById("pdfUrl").value;
 
 const url = "/media/guidance_articles/ProjetoTCC_-_PartII.pdf";
 
+let doc;
+let currentPage = 1;
+
 (async function () {
     pdfjsLib.GlobalWorkerOptions.workerSrc = "/media/pdf.js/build/pdf.worker.js";
-    const doc = await pdfjsLib.getDocument(url).promise;
+    doc = await pdfjsLib.getDocument(url).promise;
 
-    // Renderizar todas as páginas de uma vez
+    // Renderizar todas as páginas
     for (let i = 1; i <= doc._pdfInfo.numPages; i++) {
         await getPage(doc, i);
     }
@@ -19,9 +22,9 @@ async function getPage(doc, pageNumber) {
         // Criar um novo contêiner para cada página
         const pageContainer = document.createElement("div");
         pageContainer.className = "pdf-page";
-        
+
         // Adicionar o contêiner da página ao contêiner principal
-        document.getElementById("pdfContainer").appendChild(pageContainer);
+        document.getElementById("pdfPages").appendChild(pageContainer);
 
         // Get the dimensions of the mainContent element
         const mainContent = document.querySelector('.content-wrapper');
