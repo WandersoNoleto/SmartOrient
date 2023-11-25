@@ -1,21 +1,35 @@
 {% extends "baseStudent.html" %}
 {% load static %}
 
-{% block imports %}<script src="{% static "js/openGuidance.js" %}"></script>{% endblock imports %}
+{% block imports %}
+    <script src="{% static "js/openGuidance.js" %}"></script>
+{% endblock imports %}
+
 {% block title %}{{ guidance.project_title_format }}{% endblock title %}
+
 {% block mainContent %}
     <div class="container">
         <div class="card mt-4 content-wrapper bg-white custom-card-style">
-            <div class="card-header text-center">
-                <h1 class="font-weight-bold" style="font-size: 1.5rem;">{{ guidance.project_title }}</h1>
+            <div class="card-header text-center bg-primary">
+                <!-- Barra divisória azul -->
             </div>
+
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p class="font-weight-bold mb-2">Código do Projeto:</p>
-                        <p class="mb-4 font-weight-bold">{{ guidance.guidance_code }}</p>
+                        <p class="mb-2">Título do Projeto:</p>
+                        <p class="mb-4 ">{{ guidance.project_title }}</p>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="mb-6 font-weight-bold big">
+                            {{ guidance.guidance_code }}
+                        </p>
+                    </div>
+                </div>
+
                 <div class="row text-center">
                     <div class="col-md-6">
                         <p class="d-flex align-items-center">
@@ -28,6 +42,7 @@
                         </p>
                     </div>
                 </div>
+
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <p class="d-flex align-items-center">
@@ -51,11 +66,12 @@
              
                 <hr class="mt-5 mb-5">
 
+                <!-- Nova divisão com container para os artigos -->
                 <div class="row">
                     {% for article in articles %}
                         <div class="col-md-3">
                             <a href="{% url "view_pdf" article.id %}">                            
-                            <p class="font-weight-bold">{{ article.title }}</p>
+                                <p class="font-weight-bold">{{ article.title }}</p>
                             </a>
                         </div>
                     {% endfor %}
@@ -64,32 +80,27 @@
         </div>
     </div>
 
-<div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="fileUploadModalLabel">Escolher Arquivo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fileUploadModalLabel">Escolher Arquivo</h5>
+                </div>
+                <form method="post" action="{% url 'save_guidance_article' guidance.id %}" enctype="multipart/form-data" id="modalUploadForm">
+                    {% csrf_token %}
+                    <div class="modal-body text-center">
+                        <label for="file-upload-modal" class="btn btn-primary">
+                            <input type="text" name="title" id="title-input" hidden>
+                            <input id="file-upload-modal" type="file" name="file" style="display:none;" onchange="displayFileNameModal()">
+                            Selecionar Arquivo
+                        </label>
+                        <p id="selectedFileNameModal" class="mt-2"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                    </div>
+                </form>
             </div>
-            <form method="post" action="{% url 'save_guidance_article' guidance.id %}" enctype="multipart/form-data" id="modalUploadForm">
-                {% csrf_token %}
-                <div class="modal-body text-center">
-                    <label for="file-upload-modal" class="btn btn-primary">
-                        <input type="text" name="title" id="title-input" hidden>
-                        <input id="file-upload-modal" type="file" name="file" style="display:none;" onchange="displayFileNameModal()">
-                        Selecionar Arquivo
-                    </label>
-                    <p id="selectedFileNameModal" class="mt-2"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Enviar</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
-
 {% endblock mainContent %}

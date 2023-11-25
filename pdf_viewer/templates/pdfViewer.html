@@ -5,23 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ article.title }} | SmartOrient</title>
-    <link rel="stylesheet" href="{% static "css/pdfViewer.css" %}">
+
     <script src="/media/pdf.js/build/pdf.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
     <link rel="icon" type="image/png" href="{% static 'svgs/LogoSmartOrientAlt4.svg' %}">
+    <link rel="stylesheet" href="{% static "css/pdfViewer.css" %}">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand navbar-dark align-items-center">
-        <a href="{% url "Home" %}" class="brand-link">
+    <nav class=" navbar navbar-expand navbar-dark align-items-center">
+        <!-- Parte à esquerda -->
+        <a href="{% url "Home" %}" class="brand-link ml-3">
             <img src="{% static "svgs/LogoSmartOrientAlt4-dark.svg" %}" alt="LogoSmartOrient" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">SmartOrient</span>
+            <span class="brand-text font-weight logo-name">SmartOrient</span>
         </a>
-       
+    
+        <div id="pageInfo" class="text-center mx-auto w-100">
+            <div class="d-inline-block text-white">
+                <h6 class="font-weight-bold">{{article.title}}</h6>
+                <div id="currentPage" class="d-inline-block"></div>
+                <div class="d-inline-block">/</div>
+                <div id="totalPages" class="d-inline-block"></div>
+            </div>
+        </div>
+    
+        <!-- Parte à direita -->
         <div class="navbar-nav ml-auto align-items-center">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center mr-3">
                 <div class="user-icon text-sm">
                     <i class="nav-icon fa-solid fa-circle-user text-white"></i>
                 </div>
@@ -38,14 +50,14 @@
             </li>
         </div>
     </nav>
+    
+    
 
-    <div id="pageInfo" class="text-center" hidden>
-        <h6></h6><div id="currentPage"></div>/<div id="totalPages"></div>
-    </div>
+
     
     <div class="container-fluid p-3 page-content">
         <div class="controls">
-            <input type="hidden" id="pdfUrl" value="{{ article.file.path }}">
+            <input type="hidden" id="pdfUrl" value="{{ article.file.url }}">
         </div>
 
         <div id="pdfContainer" class="pdf-container default-scrollbar">
@@ -53,7 +65,7 @@
             <div id="pdfPages" class="pdf-pages d-flex justify-content-center align-items-center"></div>
         </div>
 
-        <script src="{% static "js/test.js" %}"></script>
+        <script src="{% static "js/pdfViewer.js" %}"></script>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>

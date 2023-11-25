@@ -31,3 +31,8 @@ body {
     background-color: #f0f0f0; /* Cor de fundo cinza para a área de renderização da página */
     padding: 20px; /* Adicione um preenchimento para espaçamento */
 }
+
+.logo-name{
+    text-decoration: none; /* Remove sublinhado */
+    color: white; /* Define a cor como branca */
+}

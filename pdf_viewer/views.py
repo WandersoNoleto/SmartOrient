@@ -9,7 +9,6 @@ def view_pdf(request, id):
 
     context = {
         'article': article,
-        'article_path': article.file.path
     }
-    print(article.file.path)
+
     return render(request, "pdfViewer.html", context)
