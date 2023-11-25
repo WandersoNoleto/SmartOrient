@@ -1,3 +1,13 @@
+:root{
+    --default-blue: #01579B;
+}
+
+
+
+.default-blue-bg{
+    background-color: var(--default-blue);
+}
+
 .default-scrollbar::-webkit-scrollbar {
     width: 0.5rem;
 }
@@ -25,13 +35,9 @@
 .blue-stripe {
     width: 4px; /* Largura da faixa azul */
     height: 100%; /* Altura igual à altura do card */
-    background-color: #007BFF; /* Cor azul */
+    background-color: var(--default-blue); /* Cor azul */
     position: absolute;
     left: 0;
     top: 0;
 }
 
-.custom-card-style {
-    max-height: 10rem;
-    overflow: hidden; /* Adiciona overflow:hidden para evitar que o conteúdo ultrapasse a altura definida */
-}

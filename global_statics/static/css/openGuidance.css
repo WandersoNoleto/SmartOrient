@@ -1,0 +1,39 @@
+:root{
+    --default-blue: #01579B;
+}
+
+.default-blue-bg{
+    background-color: var(--default-blue)
+}
+
+.pdf-icon {
+    width: 6rem; /* Ajuste a largura conforme necessário */
+    height: 8rem; /* Ajuste a altura conforme necessário */
+    border: 1px solid #ddd; /* Cor da borda */
+    border-radius: 8px; /* Borda arredondada, ajuste conforme necessário */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Centraliza a div dentro do col-md-3 */
+}
+
+.pdf-icon i {
+    font-size: 2rem; /* Ajuste o tamanho do ícone conforme necessário */
+    color: grey;
+}
+
+.pdf-icon i:hover{
+    color: red;
+}
+
+.article-title{
+    color: black;
+    text-decoration: none;
+}
+
+hr{
+    border-width: 0.3rem;
+    border-radius: 1rem;
+    background-color: var(--default-blue)
+}
+
