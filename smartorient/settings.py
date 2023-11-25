@@ -76,7 +76,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'SmartOrient',
-        'USER': os.getenv('USER'),
+        'USER': 'postgres',
         'PASSWORD': os.getenv('PASSWORD'),
         'HOST': 'localhost'
     }
