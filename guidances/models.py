@@ -9,7 +9,7 @@ from users.models import Advisor, Coordination, Student
 
 class Guidance(models.Model):
 
-    project_title = models.CharField(max_length=100, verbose_name="Título do projeto")
+    project_title = models.CharField(max_length=150, verbose_name="Título do projeto")
     student       = models.ForeignKey(Student, on_delete=models.CASCADE, max_length=100, blank=False, null=False, verbose_name="Estudante")
     advisor       = models.ForeignKey(Advisor, on_delete=models.CASCADE, max_length=100, blank=False, null=False, verbose_name="Orientador")
     coordination  = models.ForeignKey(Coordination, on_delete=models.SET_NULL, max_length=100, blank=True, null=True, verbose_name="Coordenação")
