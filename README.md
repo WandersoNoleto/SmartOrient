@@ -33,7 +33,7 @@ Install the dependencies listed in the requirements.txt file
 ```
 pip install > requirements.txt
 ```
-###### :key: Create a .env file and set the variables according to the [.env.example](https://github.com/WandersoNoleto/SmartOrient/blob/main/smartorient/.env.example) file. Create a PostgreSQL database named SmartOrient and set the USER and PASSWORD accordingly. In case of issues, check the settings in settings.py. 
+###### :key: Create a .env file and set the variables according to the [.env.example](https://github.com/WandersoNoleto/SmartOrient/blob/main/smartorient/.env.example). Create a PostgreSQL database named SmartOrient and set the USER and PASSWORD accordingly. In case of issues, check settings.py. 
 Generate a new Django key and assign it to SECRET_KEY (in Python CLI)
 ```
 from django.core.management import utils
