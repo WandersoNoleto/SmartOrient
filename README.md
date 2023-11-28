@@ -31,7 +31,7 @@ git clone https://github.com/WandersoNoleto/SmartOrient.git
 ```
 Install the dependencies listed in the requirements.txt file
 ```
-pip install > requirements.txt
+pip install -r requirements.txt
 ```
 ###### :key: Create a .env file and set the variables according to the [.env.example](https://github.com/WandersoNoleto/SmartOrient/blob/main/smartorient/.env.example). Create a PostgreSQL database named SmartOrient and set the USER and PASSWORD accordingly. In case of issues, check settings.py. 
 Generate a new Django key and assign it to SECRET_KEY (in Python CLI)
