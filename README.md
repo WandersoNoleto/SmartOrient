@@ -33,7 +33,7 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and sync t
 ```
 uv sync
 ```
-###### :key: Create a .env file and set the variables according to the [.env.example](https://github.com/WandersoNoleto/SmartOrient/blob/main/smartorient/.env.example). Create a PostgreSQL database named SmartOrient and set the USER and PASSWORD accordingly. In case of issues, check settings.py. 
+###### :key: Copy [.env.example](https://github.com/WandersoNoleto/SmartOrient/blob/main/.env.example) to `.env` (project root) and fill in `SECRET_KEY` and `DB_PASSWORD`.
 Generate a new Django key and assign it to SECRET_KEY (in Python CLI)
 ```
 from django.core.management import utils
@@ -42,6 +42,12 @@ print(utils.get_random_secret_key())
 Or in a single command
 ```
 uv run python -c "from django.core.management import utils; print(utils.get_random_secret_key())"
+```
+
+Start PostgreSQL (Docker) and apply the migrations
+```
+docker compose up -d
+uv run python manage.py migrate
 ```
 
 Use the command to run the service
