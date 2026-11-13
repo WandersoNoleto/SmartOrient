@@ -13,6 +13,12 @@ def media_root(tmp_path, settings):
     return settings.MEDIA_ROOT
 
 
+@pytest.fixture(autouse=True)
+def fast_password_hasher(settings):
+    """The default hasher is slow on purpose; tests don't need that."""
+    settings.PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
+
+
 @pytest.fixture
 def role_groups(db):
     """The role groups the register views expect. No migration creates them (known bug)."""
