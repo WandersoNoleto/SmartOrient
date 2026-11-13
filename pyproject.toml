@@ -56,6 +56,7 @@ ignore = [
 "library/views.py" = ["B018"]                        # BUG: title_format / set_date_uploaded never called
 "users/decorators.py" = ["B006"]                     # mutable default allowed_roles=[]
 "users/views.py" = ["N806"]                          # formStudent/formAdvisor/formCoordination variables
+"tests/**" = ["DTZ011"]                              # tests mirror the naive local dates used by the app
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "smartorient.settings"
