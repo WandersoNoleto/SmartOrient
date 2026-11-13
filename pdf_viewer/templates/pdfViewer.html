@@ -21,7 +21,7 @@
             <img src="{% static "svgs/LogoSmartOrientAlt4-dark.svg" %}" alt="LogoSmartOrient" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight logo-name">SmartOrient</span>
         </a>
-    
+
         <div id="pageInfo" class="text-center mx-auto w-100">
             <div class="d-inline-block text-white">
                 <h6 class="font-weight-bold">{{article.title}}</h6>
@@ -30,19 +30,19 @@
                 <div id="totalPages" class="d-inline-block"></div>
             </div>
         </div>
-    
+
         <!-- Parte à direita -->
         <div class="navbar-nav ml-auto align-items-center">
             <div class="d-flex align-items-center mr-3">
                 <div class="user-icon text-sm">
                     <i class="nav-icon fa-solid fa-circle-user text-white"></i>
                 </div>
-    
+
                 <div class="user-name">
                     <a href="#" class="nav-link text-sm text-white">{{ user_identifier_field }}</a>
                 </div>
             </div>
-    
+
             <li class="nav-item">
                 <a href="{% url "custom_logout" %}" class="nav-link text-white">
                     <i class="fa-solid fa-arrow-right-from-bracket" alt="Logout"></i>
@@ -50,11 +50,11 @@
             </li>
         </div>
     </nav>
-    
-    
 
 
-    
+
+
+
     <div class="container-fluid p-3 page-content">
         <div class="controls">
             <input type="hidden" id="pdfUrl" value="{{ article.file.url }}">

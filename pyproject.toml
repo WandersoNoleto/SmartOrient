@@ -13,3 +13,42 @@ dependencies = [
 
 [tool.uv]
 package = false
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.7.0",
+    "ruff>=0.17.5",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+extend-exclude = ["*/migrations/*", "media", "mockups"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # isort
+    "UP",       # pyupgrade
+    "B",        # flake8-bugbear
+    "DJ",       # flake8-django
+    "SIM",      # flake8-simplify
+    "C4",       # flake8-comprehensions
+    "PIE",      # flake8-pie
+    "N",        # pep8-naming
+    "DTZ",      # flake8-datetimez
+    "RUF",      # ruff-specific
+]
+ignore = [
+    "RUF012",   # mutable class attrs: false positive for Django Meta.fields / REQUIRED_FIELDS
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Known debt, preserved on purpose until the refactor phase (fixing these changes behavior or naming)
+"dashboard/views.py" = ["N806"]                      # formGuidance variable
+"guidances/models.py" = ["DTZ005", "DJ012"]          # naive datetime.now(), method order
+"library/models.py" = ["DTZ005", "DJ012"]            # naive datetime.now(), method order
+"library/views.py" = ["B018"]                        # BUG: title_format / set_date_uploaded never called
+"users/decorators.py" = ["B006"]                     # mutable default allowed_roles=[]
+"users/views.py" = ["N806"]                          # formStudent/formAdvisor/formCoordination variables

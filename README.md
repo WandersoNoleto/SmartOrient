@@ -1,11 +1,11 @@
 ![apresentation-tip](https://github.com/WandersoNoleto/SmartOrient/blob/main/documentation/Doc-tip.png)
 
-## SmartOrient [![NPM](https://img.shields.io/npm/l/react)](https://github.com/WandersoNoleto/SmartOrient/blob/main/LICENSE) 
+## SmartOrient [![NPM](https://img.shields.io/npm/l/react)](https://github.com/WandersoNoleto/SmartOrient/blob/main/LICENSE)
 
 
 ## About
 
-SmartOrient is an open-source, web-based management solution for academic thesis guidance. The proposal is to bring together functionalities that encompass the entire process of managing guidance within a single platform, eliminating the need for multiple tools. The application caters to three types of users: 
+SmartOrient is an open-source, web-based management solution for academic thesis guidance. The proposal is to bring together functionalities that encompass the entire process of managing guidance within a single platform, eliminating the need for multiple tools. The application caters to three types of users:
 * Student - can view and register projects, attach files
 * Advisor - can view projects they are a part of, accept participation requests, read attached files
 * Coordination - responsible for overseeing all actions carried out by other parties
@@ -19,7 +19,7 @@ SmartOrient is an open-source, web-based management solution for academic thesis
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 
 
@@ -55,3 +55,13 @@ Use the command to run the service
 uv run python manage.py runserver
 ```
 
+### Development
+
+Enable the git hooks (ruff lint + format and basic checks run on every commit)
+```
+uv run pre-commit install
+```
+Run them manually on the whole project
+```
+uv run pre-commit run --all-files
+```
