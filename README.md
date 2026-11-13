@@ -61,7 +61,11 @@ Enable the git hooks (ruff lint + format and basic checks run on every commit)
 ```
 uv run pre-commit install
 ```
-Run them manually on the whole project
+Run the tests (requires the PostgreSQL container running) with coverage
+```
+uv run pytest --cov
+```
+Run the hooks manually on the whole project
 ```
 uv run pre-commit run --all-files
 ```

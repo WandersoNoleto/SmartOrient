@@ -16,7 +16,11 @@ package = false
 
 [dependency-groups]
 dev = [
+    "factory-boy>=3.3.3",
     "pre-commit>=4.7.0",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "pytest-django>=4.14.0",
     "ruff>=0.17.5",
 ]
 
@@ -52,3 +56,22 @@ ignore = [
 "library/views.py" = ["B018"]                        # BUG: title_format / set_date_uploaded never called
 "users/decorators.py" = ["B006"]                     # mutable default allowed_roles=[]
 "users/views.py" = ["N806"]                          # formStudent/formAdvisor/formCoordination variables
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "smartorient.settings"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--strict-markers -ra"
+xfail_strict = true
+filterwarnings = [
+    "error::DeprecationWarning",
+    "error::PendingDeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["dashboard", "guidances", "library", "pdf_viewer", "users", "smartorient"]
+omit = ["*/migrations/*", "*/tests.py", "smartorient/asgi.py", "smartorient/wsgi.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
