@@ -1,0 +1,78 @@
+[project]
+name = "smartorient"
+version = "0.1.0"
+description = "Web platform for managing academic thesis guidance"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=6.1,<6.2",
+    "psycopg[binary]>=3.2",
+    "python-dotenv>=1.0.0",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "factory-boy>=3.3.3",
+    "pre-commit>=4.7.0",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "pytest-django>=4.14.0",
+    "ruff>=0.17.5",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+extend-exclude = ["*/migrations/*", "media", "mockups"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # isort
+    "UP",       # pyupgrade
+    "B",        # flake8-bugbear
+    "DJ",       # flake8-django
+    "SIM",      # flake8-simplify
+    "C4",       # flake8-comprehensions
+    "PIE",      # flake8-pie
+    "N",        # pep8-naming
+    "DTZ",      # flake8-datetimez
+    "RUF",      # ruff-specific
+]
+ignore = [
+    "RUF012",   # mutable class attrs: false positive for Django Meta.fields / REQUIRED_FIELDS
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Known debt, preserved on purpose until the refactor phase (fixing these changes behavior or naming)
+"dashboard/views.py" = ["N806"]                      # formGuidance variable
+"guidances/models.py" = ["DTZ005", "DJ012"]          # naive datetime.now(), method order
+"library/models.py" = ["DTZ005", "DJ012"]            # naive datetime.now(), method order
+"library/views.py" = ["B018"]                        # BUG: title_format / set_date_uploaded never called
+"users/decorators.py" = ["B006"]                     # mutable default allowed_roles=[]
+"users/views.py" = ["N806"]                          # formStudent/formAdvisor/formCoordination variables
+"tests/**" = ["DTZ011"]                              # tests mirror the naive local dates used by the app
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "smartorient.settings"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--strict-markers -ra"
+xfail_strict = true
+filterwarnings = [
+    "error::DeprecationWarning",
+    "error::PendingDeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["dashboard", "guidances", "library", "pdf_viewer", "users", "smartorient"]
+omit = ["*/migrations/*", "*/tests.py", "smartorient/asgi.py", "smartorient/wsgi.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

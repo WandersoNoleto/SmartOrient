@@ -1,162 +1,149 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from users.forms import (AdvisorRegisterForm, CoordinationRegisterForm,
-                         StudentRegisterForm)
+from users.forms import AdvisorRegisterForm, CoordinationRegisterForm, StudentRegisterForm
 from users.models import Advisor, Coordination, Student
 
 
 def login_student(request):
     if request.method == "POST":
-        email    = request.POST.get("email")
+        email = request.POST.get("email")
         password = request.POST.get("password")
 
         user = authenticate(request, email=email, password=password)
-        if user is not None and user.groups.filter(name='Students').exists():
+        if user is not None and user.groups.filter(name="Students").exists():
             login(request, user)
             return redirect("Home")
         else:
-            return render(request, 'login/login-student.html', {'error_message': 'Credenciais incorretas'})
+            return render(request, "login/login-student.html", {"error_message": "Credenciais incorretas"})
 
-    return render(request, 'login/login-student.html')
-
+    return render(request, "login/login-student.html")
 
 
 def register_student_page(request):
     formStudent = StudentRegisterForm
 
-    context = {'formStudent': formStudent}
+    context = {"formStudent": formStudent}
 
-    return render(request, 'register/register-student.html', context)
-
+    return render(request, "register/register-student.html", context)
 
 
 def register_student_save(request):
     if request.method == "POST":
         full_name = request.POST.get("full_name")
-        course    = request.POST.get("course")
-        institution  = request.POST.get("institution")
+        course = request.POST.get("course")
+        institution = request.POST.get("institution")
         phone_number = request.POST.get("phone_number")
-        enrollment   = request.POST.get("enrollment")
-        password     = request.POST.get("password")
-        email        = request.POST.get("email")
+        enrollment = request.POST.get("enrollment")
+        password = request.POST.get("password")
+        email = request.POST.get("email")
 
         student = Student.objects.create_user(
-            full_name       = full_name, 
-            course          = course,
-            institution     = institution,
-            phone_number    = phone_number,
-            enrollment      = enrollment,
-            password        = password, 
-            email           = email
+            full_name=full_name,
+            course=course,
+            institution=institution,
+            phone_number=phone_number,
+            enrollment=enrollment,
+            password=password,
+            email=email,
         )
 
-        student_group = Group.objects.get(name='Students')
+        student_group = Group.objects.get(name="Students")
         student.groups.add(student_group)
         student.save()
 
     return redirect("login_student")
 
 
-
 def login_advisor(request):
     if request.method == "POST":
-        email     = request.POST.get("email")
-        password  = request.POST.get("password")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
 
         user = authenticate(request, email=email, password=password)
-        if user is not None and user.groups.filter(name='Advisors').exists():
+        if user is not None and user.groups.filter(name="Advisors").exists():
             login(request, user)
             return redirect("home_advisor")
         else:
-            return render(request, 'login/login-advisor.html', {'error_message': 'Credenciais incorretas'})
+            return render(request, "login/login-advisor.html", {"error_message": "Credenciais incorretas"})
 
-    return render(request, 'login/login-advisor.html')
-
+    return render(request, "login/login-advisor.html")
 
 
 def register_advisor_page(request):
     formAdvisor = AdvisorRegisterForm
 
-    context = {'formAdvisor': formAdvisor}
+    context = {"formAdvisor": formAdvisor}
 
-    return render(request, 'register/register-advisor.html', context)
-
+    return render(request, "register/register-advisor.html", context)
 
 
 def register_advisor_save(request):
     if request.method == "POST":
-        full_name    = request.POST.get("full_name")
+        full_name = request.POST.get("full_name")
         phone_number = request.POST.get("phone_number")
-        enrollment   = request.POST.get("enrollment")
-        institution  = request.POST.get("institution")
-        password     = request.POST.get("password")
-        email        = request.POST.get("email")
+        enrollment = request.POST.get("enrollment")
+        institution = request.POST.get("institution")
+        password = request.POST.get("password")
+        email = request.POST.get("email")
 
         advisor = Advisor.objects.create_user(
-            full_name       = full_name, 
-            phone_number    = phone_number,
-            enrollment      = enrollment,
-            institution     = institution,
-            password        = password, 
-            email           = email
+            full_name=full_name,
+            phone_number=phone_number,
+            enrollment=enrollment,
+            institution=institution,
+            password=password,
+            email=email,
         )
-        advisor_group = Group.objects.get(name='Advisors')
+        advisor_group = Group.objects.get(name="Advisors")
         advisor.groups.add(advisor_group)
         advisor.save()
 
     return redirect("login_advisor")
 
 
-
 def login_coordination(request):
     if request.method == "POST":
-        email    = request.POST.get("email")
+        email = request.POST.get("email")
         password = request.POST.get("password")
 
         user = authenticate(request, email=email, password=password)
-        if user is not None and user.groups.filter(name='Coordinations').exists():
+        if user is not None and user.groups.filter(name="Coordinations").exists():
             login(request, user)
-            return redirect("home_coordination") 
+            return redirect("home_coordination")
         else:
-            return render(request, 'login/login-coordination.html', {'error_message': 'Credenciais incorretas'})
+            return render(request, "login/login-coordination.html", {"error_message": "Credenciais incorretas"})
 
-    return render(request, 'login/login-coordination.html')
-
+    return render(request, "login/login-coordination.html")
 
 
 def register_coordination_page(request):
     formCoordination = CoordinationRegisterForm
 
-    context = {'formCoordination': formCoordination}
+    context = {"formCoordination": formCoordination}
 
-    return render(request, 'register/register-coordination.html', context)
-
+    return render(request, "register/register-coordination.html", context)
 
 
 def register_coordination_save(request):
     if request.method == "POST":
-        institution   = request.POST.get("institution")
-        campus       = request.POST.get("campus")
-        code         = request.POST.get("code")
-        password     = request.POST.get("password")
-        email        = request.POST.get("email")
+        institution = request.POST.get("institution")
+        campus = request.POST.get("campus")
+        code = request.POST.get("code")
+        password = request.POST.get("password")
+        email = request.POST.get("email")
 
         coordination = Coordination.objects.create_user(
-            institution = institution, 
-            campus     = campus,
-            code       = code,
-            password   = password, 
-            email      = email
+            institution=institution, campus=campus, code=code, password=password, email=email
         )
 
-        coordination_group = Group.objects.get(name='Coordinations')
+        coordination_group = Group.objects.get(name="Coordinations")
         coordination.groups.add(coordination_group)
         coordination.save()
 
     return redirect("login_coordination")
+
 
 def custom_logout(request):
     if request.user.is_authenticated:

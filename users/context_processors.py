@@ -9,15 +9,15 @@ def logged_user(request):
 
     if student:
         user = student
-        identifier_field = user.abbreviate_name if user else ''
+        identifier_field = user.abbreviate_name if user else ""
     elif advisor:
         user = advisor
-        identifier_field = user.abbreviate_name if user else ''
+        identifier_field = user.abbreviate_name if user else ""
     elif coordination:
         user = coordination
-        identifier_field = user.code if user else ''
+        identifier_field = user.code if user else ""
     else:
         user = None
-        identifier_field = ''
+        identifier_field = ""
 
-    return {'logged_user': user, 'user_identifier_field': identifier_field}
+    return {"logged_user": user, "user_identifier_field": identifier_field}

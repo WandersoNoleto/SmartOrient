@@ -12,14 +12,14 @@
         <hr>
         <form method="post" action="{% url "register_guidance_save" %}" class="ps-3 pe-3">
             {% csrf_token %}
-            
+
             <div class="mb-3 row">
                 <label for="projectTitle" class="col-sm-2 form-label">Título</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="projectTitle" name="project_title" required draggable="false">
                 </div>
             </div>
-            
+
             <div class="mb-3 row">
                 <label for="advisor" class="col-sm-2 col-form-label">Orientador</label>
                 <div class="col-sm-6">
